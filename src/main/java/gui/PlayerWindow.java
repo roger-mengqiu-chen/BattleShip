@@ -22,9 +22,9 @@ public class PlayerWindow extends JFrame implements Observer{
 	private String playerName;
 	private String enemyName;
 	private JButton but_connect;
-	private JButton but_disconnect;
-	private JTextField txt_op; // Text field for opponent name
-	private JTextField txt_player; // Text field for player name
+	private JButton butDisconnect;
+	private JTextField txtOp; // Text field for opponent name
+	private JTextField txtPlayer; // Text field for player name
 	
 	// Chat GUI components
 	private JButton send;
@@ -88,7 +88,7 @@ public class PlayerWindow extends JFrame implements Observer{
 		getContentPane().add(createCenter(), BorderLayout.CENTER);
 		getContentPane().add(createEast(), BorderLayout.EAST);
 		
-		but_disconnect.setEnabled(false);
+		butDisconnect.setEnabled(false);
 		deployed.setEnabled(false);
 		send.setEnabled(false);
 		
@@ -106,38 +106,38 @@ public class PlayerWindow extends JFrame implements Observer{
 		JPanel left = new JPanel(new GridLayout(1,2));
 		JLabel lbl_pl = new JLabel ("Player: ");
 		lbl_pl.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		txt_player = new JTextField();
-		txt_player.setEditable(false);
-		txt_player.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		txt_player.setPreferredSize(new Dimension(200,30));
+		txtPlayer = new JTextField();
+		txtPlayer.setEditable(false);
+		txtPlayer.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		txtPlayer.setPreferredSize(new Dimension(200,30));
 		left.add(lbl_pl);
-		left.add(txt_player);
+		left.add(txtPlayer);
 		
 		JPanel right = new JPanel(new GridLayout(1,2));
 		JLabel lbl_ene = new JLabel("Opponent:");
-		txt_op = new JTextField();
-		txt_op.setEditable(false);
-		txt_op.setFont(new Font("Segoe UI", Font.PLAIN, 24));
-		txt_op.setPreferredSize(new Dimension(200,30));
+		txtOp = new JTextField();
+		txtOp.setEditable(false);
+		txtOp.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+		txtOp.setPreferredSize(new Dimension(200,30));
 		lbl_ene.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		right.add(lbl_ene);
-		right.add(txt_op);
+		right.add(txtOp);
 		
 		JPanel center = new JPanel(new GridLayout(1,3));
 		but_connect = new JButton ("Connect");
 		but_connect.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		but_connect.addActionListener(new ButtonListener());
 		
-		but_disconnect = new JButton ("Disconnect");
-		but_disconnect.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		but_disconnect.addActionListener(new ButtonListener());
+		butDisconnect = new JButton ("Disconnect");
+		butDisconnect.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		butDisconnect.addActionListener(new ButtonListener());
 		
 		deployed = new JButton("READY TO COMBAT");
 		deployed.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		deployed.addActionListener(new ButtonListener());
 		
 		center.add(but_connect);
-		center.add(but_disconnect);
+		center.add(butDisconnect);
 		center.add(deployed);
 		
 		panel.add(center, BorderLayout.CENTER);
@@ -284,7 +284,7 @@ public class PlayerWindow extends JFrame implements Observer{
 			// If it is a new session, player needs to enter name
 			if (newSession) {
 				playerName = JOptionPane.showInputDialog("Enter your name");
-				txt_player.setText(playerName);
+				txtPlayer.setText(playerName);
 			}
 			but_connect.setEnabled(false);			
 			oos = new ObjectOutputStream(socket.getOutputStream());	
@@ -311,7 +311,7 @@ public class PlayerWindow extends JFrame implements Observer{
 	 */
 	public void disconnect() {
 		chatHistModel.addElement(new Message("Disconnected"));
-		but_disconnect.setEnabled(false);
+		butDisconnect.setEnabled(false);
 		send.setEnabled(false);
 		but_connect.setEnabled(true);
 		// If disconnect, reset game board
@@ -369,7 +369,7 @@ public class PlayerWindow extends JFrame implements Observer{
 			else if (m.getMsg().equals("You can start chatting")) {
 				chatHistModel.addElement(m);
 				send.setEnabled(true);
-				but_disconnect.setEnabled(true);
+				butDisconnect.setEnabled(true);
 				// After being notified chat session start, send message to the other player. This message also tells opponent player's name
 				try {
 					oos.writeObject(new Message(playerName, "CONNECTED"));
@@ -406,7 +406,7 @@ public class PlayerWindow extends JFrame implements Observer{
 			// When get "CONNECTED" message, get the name of opponent
 			else if (m.getMsg().equals("CONNECTED")) {
 				enemyName = m.getName();
-				txt_op.setText(enemyName);
+				txtOp.setText(enemyName);
 				chatHistModel.addElement(new Message("You are paired with " + enemyName));
 			}
 			
@@ -538,7 +538,7 @@ public class PlayerWindow extends JFrame implements Observer{
 			}
 			
 			// Disconnect button
-			if (e.getSource() == but_disconnect) {
+			if (e.getSource() == butDisconnect) {
 				newSession = true;
 				try {
 					oos.writeObject(new Message(playerName, "DISCONNECTED"));
