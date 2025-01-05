@@ -279,7 +279,7 @@ public class PlayerWindow extends JFrame implements Observer{
 	public void connect() {
 		
 		try {
-			socket = new Socket("localhost", 2333);
+			socket = new Socket("localhost", 9999);
 			System.out.println(socket);
 			// If it is a new session, player needs to enter name
 			if (newSession) {
@@ -294,17 +294,10 @@ public class PlayerWindow extends JFrame implements Observer{
 			resetGame(); // Initialize the game components
 			t1.start();			
 		} 
-		catch (HeadlessException e1) {
+		catch (HeadlessException | IOException e1) {
 			e1.printStackTrace();
 		}
-		catch (UnknownHostException e1) {
-			e1.printStackTrace();
-		}
-		catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-	}
+    }
 	
 	/**
 	 * Send message to indicate the player go offline and close everything
