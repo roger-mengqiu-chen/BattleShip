@@ -15,7 +15,6 @@ import java.net.*;
  * Player use this GUI to connect with other player. 
  * Player can chat, play game with opponent. 
  */
-@SuppressWarnings("serial")
 public class PlayerWindow extends JFrame implements Observer{
 	
 	// Basic GUI components
@@ -355,6 +354,7 @@ public class PlayerWindow extends JFrame implements Observer{
 			Message m = (Message) arg;
 			
 			if (m.getMsg().equals("DEPLOYED")) {
+				opReady = true;
 				opBoard.enable();
 				chatHistModel.addElement(new Message("Your opponent is ready"));
 			}
@@ -403,12 +403,6 @@ public class PlayerWindow extends JFrame implements Observer{
 				chatHistModel.addElement(new Message("You are paired with " + enemyName));
 			}
 			
-			else if (m.getMsg().equals("DEPLOYED")) {
-				opReady = true;
-				opBoard.enable();
-				chatHistModel.addElement(new Message("Your opponent is ready"));	
-			}
-			
 			else if (m.getMsg().equals("DISCONNECTED")) {
 				
 				newSession = false;
@@ -418,7 +412,6 @@ public class PlayerWindow extends JFrame implements Observer{
 				if (option == 0) {
 					connect();
 				}
-					
 			}
 			
 			// If opponent lost the game
