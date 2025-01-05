@@ -67,14 +67,14 @@ public class PlayerWindow extends JFrame implements Observer{
             @Override
             public void windowClosing(WindowEvent e)
             {
-            	try {
-					oos.writeObject(new Message(playerName, "DISCONNECTED"));
-				} catch (IOException e1) {			
-					e1.printStackTrace();
-				}
-            	finally {
-            		disconnect();
-            	} 
+			try {
+				oos.writeObject(new Message(playerName, "DISCONNECTED"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			finally {
+				disconnect();
+			}
 
             }
             	
