@@ -78,7 +78,7 @@ public class ServerWindow extends JFrame{
 		lablePort.setHorizontalAlignment(SwingConstants.CENTER);
 		lablePort.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
 
-		JTextField textPort = new JTextField(serverPort);
+		JTextField textPort = new JTextField("" + serverPort);
 		textPort.setHorizontalAlignment(SwingConstants.CENTER);
 		textPort.setFont(new Font("Consolas", Font.PLAIN, 16));
 		textPort.setEditable(false);
