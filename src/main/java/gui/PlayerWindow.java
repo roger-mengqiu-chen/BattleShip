@@ -33,11 +33,11 @@ public class PlayerWindow extends JFrame implements Observer{
 	private JTextField msg; // Text field of player typed message
 	
 	// Game GUI components, used for gaming
-	private JButton but_Aircraft;
-	private JButton but_Battleship;
-	private JButton but_Cruiser;
-	private JButton but_Submarine;
-	private JButton but_Destroyer;
+	private JButton butAircraft;
+	private JButton butBattleship;
+	private JButton butCruiser;
+	private JButton butSubmarine;
+	private JButton butDestroyer;
 	private JButton deployed;
 	private Board playerBoard;
 	private Board opBoard;
@@ -73,7 +73,6 @@ public class PlayerWindow extends JFrame implements Observer{
 					e1.printStackTrace();
 				}
             	finally {
-            		
             		disconnect();
             	} 
 
@@ -154,36 +153,36 @@ public class PlayerWindow extends JFrame implements Observer{
 	 */
 	private JPanel createWest() {
 		JPanel panel = new JPanel(new GridLayout(5,1));
-		but_Aircraft = new JButton("Aircraft 5 squares");
-		but_Aircraft.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		but_Aircraft.addActionListener(new ShipListener());
-		but_Aircraft.setEnabled(false);
+		butAircraft = new JButton("Aircraft 5 squares");
+		butAircraft.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		butAircraft.addActionListener(new ShipListener());
+		butAircraft.setEnabled(false);
 		
-		but_Battleship = new JButton("Battleship 4 sqaures");
-		but_Battleship.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		but_Battleship.addActionListener(new ShipListener());
-		but_Battleship.setEnabled(false);
+		butBattleship = new JButton("Battleship 4 sqaures");
+		butBattleship.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		butBattleship.addActionListener(new ShipListener());
+		butBattleship.setEnabled(false);
 		
-		but_Cruiser = new JButton("Cruiser 3 squares");
-		but_Cruiser.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		but_Cruiser.addActionListener(new ShipListener());
-		but_Cruiser.setEnabled(false);
+		butCruiser = new JButton("Cruiser 3 squares");
+		butCruiser.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		butCruiser.addActionListener(new ShipListener());
+		butCruiser.setEnabled(false);
 		
-		but_Submarine = new JButton("Submaine 3 squares");
-		but_Submarine.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		but_Submarine.addActionListener(new ShipListener());
-		but_Submarine.setEnabled(false);
+		butSubmarine = new JButton("Submaine 3 squares");
+		butSubmarine.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		butSubmarine.addActionListener(new ShipListener());
+		butSubmarine.setEnabled(false);
 		
-		but_Destroyer = new JButton("Destroyer 2 squares");
-		but_Destroyer.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		but_Destroyer.addActionListener(new ShipListener());
-		but_Destroyer.setEnabled(false);
+		butDestroyer = new JButton("Destroyer 2 squares");
+		butDestroyer.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		butDestroyer.addActionListener(new ShipListener());
+		butDestroyer.setEnabled(false);
 		
-		panel.add(but_Aircraft);
-		panel.add(but_Battleship);
-		panel.add(but_Cruiser);
-		panel.add(but_Submarine);
-		panel.add(but_Destroyer);
+		panel.add(butAircraft);
+		panel.add(butBattleship);
+		panel.add(butCruiser);
+		panel.add(butSubmarine);
+		panel.add(butDestroyer);
 		return panel;
 	}
 	
@@ -344,11 +343,11 @@ public class PlayerWindow extends JFrame implements Observer{
 		ready = false;
 		opReady = false;
 		
-		but_Aircraft.setEnabled(true);
-		but_Battleship.setEnabled(true);
-		but_Cruiser.setEnabled(true);
-		but_Submarine.setEnabled(true);
-		but_Destroyer.setEnabled(true);
+		butAircraft.setEnabled(true);
+		butBattleship.setEnabled(true);
+		butCruiser.setEnabled(true);
+		butSubmarine.setEnabled(true);
+		butDestroyer.setEnabled(true);
 	
 		deployed.setEnabled(false);
 	}
@@ -653,36 +652,36 @@ public class PlayerWindow extends JFrame implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == but_Aircraft) {
+			if (e.getSource() == butAircraft) {
 				deployMod = true;
 				// ask if rotate the ship
 				boolean rotate = JOptionPane.showConfirmDialog(null,"Deploy ship vertically?") == 0;
 				deployingShip = new Ship("Aircraft", rotate);
-				but_Aircraft.setEnabled(false);				
+				butAircraft.setEnabled(false);
 			}
 			
-			else if (e.getSource() == but_Battleship) {
+			else if (e.getSource() == butBattleship) {
 				deployMod = true;
 				// ask if rotate the ship
 				boolean rotate = JOptionPane.showConfirmDialog(null,"Deploy ship vertically?") == 0;
 				deployingShip = new Ship("Battleship", rotate);
-				but_Battleship.setEnabled(false);
+				butBattleship.setEnabled(false);
 			}
 			
-			else if (e.getSource() == but_Cruiser) {
+			else if (e.getSource() == butCruiser) {
 				deployMod = true;
 				// ask if rotate the ship
 				boolean rotate = JOptionPane.showConfirmDialog(null,"Deploy ship vertically?") == 0;
 				deployingShip = new Ship("Cruiser", rotate);
-				but_Cruiser.setEnabled(false);
+				butCruiser.setEnabled(false);
 			}
 			
-			else if (e.getSource() == but_Submarine) {
+			else if (e.getSource() == butSubmarine) {
 				deployMod = true;
 				// ask if rotate the ship
 				boolean rotate = JOptionPane.showConfirmDialog(null,"Deploy ship vertically?") == 0;
 				deployingShip = new Ship("Submarine", rotate);
-				but_Submarine.setEnabled(false);
+				butSubmarine.setEnabled(false);
 			}
 			
 			else {
@@ -690,7 +689,7 @@ public class PlayerWindow extends JFrame implements Observer{
 				// ask if rotate the ship
 				boolean rotate = JOptionPane.showConfirmDialog(null,"Deploy ship vertically?") == 0;
 				deployingShip = new Ship("Destroyer", rotate);
-				but_Destroyer.setEnabled(false);
+				butDestroyer.setEnabled(false);
 			}	
 		}
 	}
