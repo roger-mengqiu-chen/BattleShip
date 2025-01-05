@@ -18,45 +18,44 @@ import javax.swing.border.LineBorder;
  */
 public class ServerWindow extends JFrame{
 
-	private JList<Message> msgHist;
-	private DefaultListModel<Message> msgHistMod; // Listmodel containing messages
-	private ServerSocket server;
-	private ArrayList<Socket> socketList;
-	
-	public ServerWindow() {
+    private DefaultListModel<Message> msgHistMod; // Listmodel containing messages
+
+    public ServerWindow() {
+		int serverWindowWidth = 400;
+		int serverWindowHeight = 500;
+		int serverPort = 9999;
 		// Create GUI
 		setTitle("Server");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		add(createNorth(), BorderLayout.NORTH);
 		add(createCenter(), BorderLayout.CENTER);
-		setSize(400,500);
+
+        setSize(serverWindowWidth, serverWindowHeight);
 		
 		setVisible(true);
-		
-		// Operational part starts
-		socketList = new ArrayList<>();
-		try {
-			server = new ServerSocket(2333);
+
+        ArrayList<Socket> socketList = new ArrayList<>();
+		try (ServerSocket server = new ServerSocket(serverPort)) {
 			msgHistMod.addElement(new Message("SERVER IS RUNNING ..........."));
 			while(true) {
-				
 				Socket c = server.accept();
-				
+
 				msgHistMod.addElement(new Message("A PLAYER CONNECTED"));
 				socketList.add(c);
-				
+
 				if(socketList.size() == 2) {
-										
 					ClientHandler ch = new ClientHandler(socketList.get(0), socketList.get(1));
 					ch.start();
 					socketList.clear();
 				}
 			}
 		} catch (SocketException e) {
-			System.out.println("Server: Socket has been closed");
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			e.printStackTrace();
+			System.out.print("Socket Exception");
+			System.out.println(e);
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
 	}
 	
@@ -95,7 +94,7 @@ public class ServerWindow extends JFrame{
 		
 		msgHistMod = new DefaultListModel<>();
 
-		msgHist = new JList<>(msgHistMod);
+        JList<Message> msgHist = new JList<>(msgHistMod);
 		
 		msgHist.setCellRenderer(new cellRender(280)); // wrap displaying string
 		msgHist.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -117,7 +116,7 @@ public class ServerWindow extends JFrame{
 		public static final String HTML_1 = "<html><body style='width: ";
 		public static final String HTML_2 = "px'>";
 		public static final String HTML_3 = "</html>";
-		private int width;
+		private final int width;
 
 		public cellRender(int width) {
 			this.width = width;
