@@ -19,6 +19,7 @@ import javax.swing.border.LineBorder;
 public class ServerWindow extends JFrame{
 
     private DefaultListModel<Message> msgHistMod; // Listmodel containing messages
+	private final int serverPort = 9999;
 
     public ServerWindow() {
 		int serverWindowWidth = 400;
@@ -64,27 +65,28 @@ public class ServerWindow extends JFrame{
 	 */
 	private JPanel createNorth() {
 		JPanel panel = new JPanel(new GridLayout(1,4));
-		JLabel labl_host = new JLabel("Host");
-		labl_host.setHorizontalAlignment(SwingConstants.CENTER);
-		labl_host.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+		JLabel labelHost = new JLabel("Host");
+		labelHost.setHorizontalAlignment(SwingConstants.CENTER);
+		labelHost.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
 		
-		JTextField text_host = new JTextField("localhost");
-		text_host.setHorizontalAlignment(SwingConstants.CENTER);
-		text_host.setFont(new Font("Consolas", Font.PLAIN, 16));
-		text_host.setEditable(false);
+		JTextField textHost = new JTextField("localhost");
+		textHost.setHorizontalAlignment(SwingConstants.CENTER);
+		textHost.setFont(new Font("Consolas", Font.PLAIN, 16));
+		textHost.setEditable(false);
 		
-		JLabel labl_port = new JLabel("Port");
-		labl_port.setHorizontalAlignment(SwingConstants.CENTER);
-		labl_port.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
-		JTextField text_port = new JTextField("2333");
-		text_port.setHorizontalAlignment(SwingConstants.CENTER);
-		text_port.setFont(new Font("Consolas", Font.PLAIN, 16));
-		text_port.setEditable(false);
+		JLabel lablePort = new JLabel("Port");
+		lablePort.setHorizontalAlignment(SwingConstants.CENTER);
+		lablePort.setFont(new Font("Segoe UI Black", Font.BOLD, 18));
+
+		JTextField textPort = new JTextField(serverPort);
+		textPort.setHorizontalAlignment(SwingConstants.CENTER);
+		textPort.setFont(new Font("Consolas", Font.PLAIN, 16));
+		textPort.setEditable(false);
 		
-		panel.add(labl_host);
-		panel.add(text_host);
-		panel.add(labl_port);
-		panel.add(text_port);
+		panel.add(labelHost);
+		panel.add(textHost);
+		panel.add(lablePort);
+		panel.add(textPort);
 		
 		return panel;
 	}
